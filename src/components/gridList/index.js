@@ -168,11 +168,10 @@ export default class GridList extends Component {
                     this.state.PokemonToShow.map((row, index) => (
                         <CardDeck key={index} className="my-3">
                             {row.map((pokemon, index) => (
-                                // <Card key={index} text={this.renderTypeColor(pokemon.type[0]) === 'light' ? 'dark' : 'white'} bg={this.renderTypeColor(pokemon.type[0])} onClick={() => { this.redirectToPokemonInfo(pokemon.name) }}>
                                 <Card className="cardBox" key={index} text={this.renderTypeColor(pokemon.type[0]) === 'light' ? 'dark' : 'white'} onClick={() => { this.redirectToPokemonInfo(pokemon.name) }}>
                                     <Card.Img className="w-75 mx-auto" variant="top" src={pokemon.img} />
                                     <Card.Body className="p-0" ></Card.Body>
-                                    <Card.Footer class="name" style={{ backgroundColor: this.renderTypeColor(pokemon.type[0]) }}>
+                                    <Card.Footer className="name" style={{ backgroundColor: this.renderTypeColor(pokemon.type[0]) }}>
                                         {pokemon.name}
                                     </Card.Footer>
                                 </Card>
