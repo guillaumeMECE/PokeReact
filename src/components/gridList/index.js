@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
+import { BrowserRouter, Route } from 'react-router-dom'
 import "./style.css"
 
 import CardDeck from 'react-bootstrap/CardDeck';
-import Card, { CardBody } from 'react-bootstrap/Card';
+import Card from 'react-bootstrap/Card';
+import Spinner from 'react-bootstrap/Spinner'
 
 import axios from 'axios';
 
@@ -17,7 +20,9 @@ export default class GridList extends Component {
             Page: 0,
             Pokemon: [],
             PokemonToShow: [],
-            isLoad: false
+            isLoad: false,
+            isRedirect: false,
+            redirectPath: null
         };
     }
 
@@ -47,7 +52,7 @@ export default class GridList extends Component {
     loadPokemonToShow() {
         console.log("x1");
         this.setState({ isLoad: false });
-        this.setState({Page: this.state.Page+1})
+        this.setState({ Page: this.state.Page + 1 })
         console.log("PAGE", this.state.Page);
         console.log("x2");
         this.setState({ PokemonToShow: this.state.Pokemon.slice(0, CARD_PER_ROW * ROW_PER_LOADING * this.state.Page) });
@@ -81,28 +86,100 @@ export default class GridList extends Component {
             // document.removeEventListener('scroll', this.trackScrolling);
             this.loadPokemonToShow();
         }
-    };
+    }
+
+    redirectToPokemonInfo(name) {
+        console.log("WORKKKK");
+        this.setState({
+            isRedirect: true,
+            redirectPath: name
+        })
+    }
+
+    renderRedirect = () => {
+        if (this.state.isRedirect) {
+            return <Redirect to={`/pokemon/${this.state.redirectPath}`} />
+        }
+    }
+
+    renderTypeColor(type) {
+        let color;
+        switch (type) {
+            case "Grass":
+                color = "#9bcc50";
+                break;
+            case "Bug":
+                color = "#729f3f";
+                break;
+            case "Psychic":
+                color = "#f366b9";
+                break;
+            case "Fire":
+                color = "#fd7d24"
+                break;
+            case "Water":
+                color = "#4592c4"
+                break;
+            case "Ice":
+                color = "#51c4e7";
+                break;
+            case "Flying":
+                color = "#92ace0"
+                break;
+            case "Poison":
+                color = "#b97fc9"
+                break;
+            case "Ghost":
+                color = "#7b61a2"
+                break;
+            case "Electric":
+                color = "#eed535";
+                break;
+            case "Rock":
+                color = "#a38c21"
+                break;
+            case "Normal":
+                color = "#a4acaf"
+                break;
+            case "Fighting":
+                color = "#d56723"
+                break;
+            case "Ground":
+                color = "#d87843"
+                break;
+            case "Dragon":
+                color = "#036dc4"
+                break;
+
+            default:
+                color = "light"
+                break;
+        }
+        return color;
+    }
 
     render() {
 
         return (
 
             <div className="GridList" id="grid_list">
+                {this.renderRedirect()}
                 {this.state.isLoad ?
                     this.state.PokemonToShow.map((row, index) => (
                         <CardDeck key={index} className="my-3">
                             {row.map((pokemon, index) => (
-                                <Card key={index}>
+                                // <Card key={index} text={this.renderTypeColor(pokemon.type[0]) === 'light' ? 'dark' : 'white'} bg={this.renderTypeColor(pokemon.type[0])} onClick={() => { this.redirectToPokemonInfo(pokemon.name) }}>
+                                <Card className="cardBox" key={index} text={this.renderTypeColor(pokemon.type[0]) === 'light' ? 'dark' : 'white'} onClick={() => { this.redirectToPokemonInfo(pokemon.name) }}>
                                     <Card.Img className="w-75 mx-auto" variant="top" src={pokemon.img} />
-                                    <Card.Body className="p-0"></Card.Body>
-                                    <Card.Footer>
+                                    <Card.Body className="p-0" ></Card.Body>
+                                    <Card.Footer class="name" style={{ backgroundColor: this.renderTypeColor(pokemon.type[0]) }}>
                                         {pokemon.name}
                                     </Card.Footer>
                                 </Card>
                             ))}
                         </CardDeck>
                     ))
-                    : "Loading content..."
+                    : <Spinner animation="border" />
                 }
             </div>
         );

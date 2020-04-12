@@ -1,0 +1,10 @@
+.PokemonInfo{
+    margin-top: 64px;
+    width: 50%;
+    border: 2px solid #e6e6e6;
+    border-radius: 10px;
+}
+.infoBox{
+    border: 2px solid #e6e6e6;
+    border-radius: 10px;
+}

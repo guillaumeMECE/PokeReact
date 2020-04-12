@@ -1,3 +1,9 @@
 .GridList{
     margin-top: 64px;
 }
+.name{
+    font-weight: bold;
+}
+.cardBox{
+    max-width: 200px;
+}
