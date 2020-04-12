@@ -102,7 +102,7 @@ export default class PokemonInfo extends Component {
                 break;
 
             default:
-                color = "light"
+                color = "#036dc4"
                 break;
         }
         return color;
@@ -142,7 +142,6 @@ export default class PokemonInfo extends Component {
     }
 
     redirectToPokedex() {
-        console.log("WORKKKK");
         this.setState({
             isRedirect: true
         })
@@ -155,7 +154,6 @@ export default class PokemonInfo extends Component {
     }
 
     render() {
-
         return (
             <div>
                 <Button variant="outline-primary" onClick={() => { this.redirectToPokedex() }}>Return Home</Button>

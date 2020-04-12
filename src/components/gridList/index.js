@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
-import { BrowserRouter, Route } from 'react-router-dom'
 import "./style.css"
 
 import CardDeck from 'react-bootstrap/CardDeck';
@@ -11,7 +10,6 @@ import axios from 'axios';
 
 const CARD_PER_ROW = 5;
 const ROW_PER_LOADING = 10;
-// const PAGE = 1;
 
 export default class GridList extends Component {
     constructor(props) {
