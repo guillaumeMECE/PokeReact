@@ -11,8 +11,6 @@ const renderPage = () => {
 
 class App extends React.Component {
   render() {
-    const { pathname } = this.props.location;
-
     return (
       <div className="App">
         <Container>
